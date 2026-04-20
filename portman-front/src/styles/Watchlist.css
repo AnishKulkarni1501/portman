@@ -1,0 +1,85 @@
+/* Page layout */
+.watchlist-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: #f5f7fb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main card */
+.watchlist-card {
+  width: 800px;
+}
+
+/* Title */
+.watchlist-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Add bar */
+.watchlist-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.watchlist-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.watchlist-input:focus {
+  border-color: #4a90e2;
+}
+
+/* Add button */
+.add-btn {
+  padding: 10px 16px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-btn:hover {
+  background: #357abd;
+}
+
+.add-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Grid */
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* Messages */
+.watchlist-message {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}

@@ -22,8 +22,4 @@ public class MarketController {
         return service.getStockPrice(symbol.toUpperCase());
     }
 
-    @GetMapping("/{symbol}/history")
-    public List<Map<String, String>> getHistory(@PathVariable String symbol) {
-        return service.getStockHistory(symbol);
-    }
 }
