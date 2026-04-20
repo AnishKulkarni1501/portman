@@ -3,6 +3,9 @@ package org.anish.project.portfolio.controller;
 import org.anish.project.portfolio.service.MarketServiceData;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/market")
 @CrossOrigin("*")
@@ -15,7 +18,12 @@ public class MarketController {
     }
 
     @GetMapping("/{symbol}")
-    public String getStock(@PathVariable String symbol) {
-        return service.getStockPrice(symbol);
+    public Map<String, Object> getStock(@PathVariable String symbol) {
+        return service.getStockPrice(symbol.toUpperCase());
+    }
+
+    @GetMapping("/{symbol}/history")
+    public List<Map<String, String>> getHistory(@PathVariable String symbol) {
+        return service.getStockHistory(symbol);
     }
 }

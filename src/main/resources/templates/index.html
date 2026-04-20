@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stock Portfolio</title>
+</head>
+<body>
+
+<h1>Stock Price Checker</h1>
+
+<form action="/stock" method="get">
+    <input type="text" name="symbol" placeholder="Enter Stock Symbol">
+    <button type="submit">Get Price</button>
+</form>
+
+<h3>Result:</h3>
+<pre th:text="${result}"></pre>
+
+</body>
+</html>

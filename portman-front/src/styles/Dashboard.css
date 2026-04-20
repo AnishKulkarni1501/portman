@@ -1,0 +1,78 @@
+/* Center entire dashboard */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* horizontal center */
+  justify-content: flex-start;
+  padding-top: 60px;
+  min-height: 100vh;
+  background: #f5f7fb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center text */
+.dashboard-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Center input */
+.search-input {
+  padding: 10px 14px;
+  width: 240px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  text-align: center; /* 👈 centers typed text */
+  transition: 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Center card */
+.stock-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  width: 280px;
+  text-align: center; /* 👈 center all text inside */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Keep rest same */
+.stock-symbol {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stock-price {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.stock-price.green {
+  color: #16a34a;
+}
+
+.stock-price.red {
+  color: #dc2626;
+}
+
+.stock-info {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #444;
+}
+
+.stock-change {
+  margin-top: 10px;
+  font-weight: 500;
+}

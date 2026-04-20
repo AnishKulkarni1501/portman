@@ -1,38 +1,383 @@
-.App {
-  text-align: center;
+/* ============================================================
+   PORTFOLIO MANAGER — Dark Terminal Theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg:          #080c10;
+  --surface:     #0d1117;
+  --surface-2:   #141b24;
+  --border:      #1e2d3d;
+  --accent:      #00e676;
+  --accent-dim:  #00e67620;
+  --accent-glow: #00e67640;
+  --red:         #ff4d6d;
+  --red-dim:     #ff4d6d20;
+  --text:        #e2eaf4;
+  --text-muted:  #5a7088;
+  --mono:        'Space Mono', monospace;
+  --sans:        'Syne', sans-serif;
+  --radius:      8px;
+  --transition:  0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ── Reset & Base ────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
   min-height: 100vh;
+  overflow-x: hidden;
+
+  /* subtle grid texture */
+  background-image:
+    linear-gradient(rgba(0, 230, 118, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 230, 118, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  text-align: center;
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.app-title {
+  font-family: var(--sans);
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.app-title span {
+  color: var(--accent);
+}
+
+.app-subtitle {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* ── Search Bar ──────────────────────────────────────────── */
+.search-row {
   display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.search-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  padding: 12px 20px;
+  width: 260px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  letter-spacing: 0.06em;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.btn {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.btn:hover::after { opacity: 0.07; }
+.btn:active::after { opacity: 0.15; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn-buy {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  margin-top: 8px;
+}
+
+.btn-buy:hover {
+  background: var(--accent-dim);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* ── Stock Card ──────────────────────────────────────────── */
+.stock-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
+  min-width: 280px;
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  position: relative;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.stock-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.6;
+}
+
+.stock-symbol {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stock-price {
+  font-family: var(--mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.stock-change {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.stock-change.positive {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.stock-change.negative {
+  color: var(--red);
+  background: var(--red-dim);
+}
+
+/* ── Section Headings ────────────────────────────────────── */
+.section-heading {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 12px;
+  margin: 40px 0 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.section-heading::before,
+.section-heading::after {
+  content: '';
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background: var(--border);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ── Chart Wrapper ───────────────────────────────────────── */
+.chart-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 8px 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+/* ── P/L Card ────────────────────────────────────────────── */
+.pl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.pl-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pl-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.pl-value {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.pl-value.positive { color: var(--accent); }
+.pl-value.negative { color: var(--red); }
+
+/* ── Portfolio Table ─────────────────────────────────────── */
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.portfolio-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.portfolio-table th {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 16px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.portfolio-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  transition: background var(--transition);
+}
+
+.portfolio-table tbody tr:hover td {
+  background: var(--surface-2);
+}
+
+.portfolio-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.portfolio-table .td-symbol {
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+/* ── Empty States ────────────────────────────────────────── */
+.empty {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 24px;
+  letter-spacing: 0.06em;
+}
+
+/* ── Live Indicator ──────────────────────────────────────── */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.6s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .app-title { font-size: 1.9rem; }
+  .pl-grid { grid-template-columns: 1fr; }
+  .search-input { width: 180px; }
+  .stock-price { font-size: 1.8rem; }
 }

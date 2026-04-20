@@ -7,5 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PortfolioApplication {
     public static void main(String[] args) {
         SpringApplication.run(PortfolioApplication.class, args);
+        String url = "http://localhost:8080";
+        System.out.println("App started on "+url);
     }
 }
